@@ -1,0 +1,11 @@
+name             'app'
+maintainer       'Jim O\'Halloran'
+maintainer_email 'jim@tuxit.com.au'
+license          'Apache 2.0'
+description      'Application'
+long_description 'Application'
+version          '0.0.1'
+
+depends 'database', '~> 2.3.0'
+depends 'apache2', '~> 2.0.0'
+depends 'php', '~> 1.3.12'
