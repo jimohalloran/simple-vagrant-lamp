@@ -36,12 +36,12 @@ To set up a development environment using Vagrant, first install the following s
 
 Install the vagrant-berkshelf and vagrant-omnibus plugins:
 
-```vagrant plugin install vagrant-omnibus
-vagrant plugin install vagrant-berkshelf```
+    vagrant plugin install vagrant-omnibus
+    vagrant plugin install vagrant-berkshelf
 
 Then from a command prompt in the same folder as this readme run the following command:
 
-```vagrant up```
+    vagrant up
 
 The first time this runs, a Vagrant "box" is downloaded which is approximately 500Mb.  This box is downloaded once and
 stored on your local machine.  Subsequent ```vagrant up``` commands will not download the box again.  The box file is
@@ -50,26 +50,26 @@ and Chef is run to configure the box as per the recipes in this repository.
 
 Once ```vagrant up``` is finished, the VM is ready to use.  You can access the VM with:
 
-``` vagrant ssh```
+    vagrant ssh
 
 No password is required.  If you need root access on the VM, passwordless sudo is available:
 
-```sudo su -```
+    sudo su -
 
 Once you've finished developing, you can stop the Vagrant VM with:
 
-```vagrant halt```
+    vagrant halt
 
 If you want to delete the VM (the code, etc is still on your local machine, so nothing is lost you'll just need to
 ```vagrant up``` and restore a database to get up and running again):
 
-``` vagrant destroy```
+    vagrant destroy
 
 You'll need to restore a database into the MySQL server in the VM to finish off the configuration.  
 
 You'll also need to create the following hosts file entry on your hsot machine:
 
-```192.168.33.11   local.app.dev```
+    192.168.33.11   local.app.dev
 
 If your IDE is set to listen for debug connections in
 port 9000 you should find debugging "just works (tm)", as Xdebug is already installed and configured in the VM.  Path
@@ -77,7 +77,7 @@ mappings might be required for PHPStorm.
 
 To access MySQL on the VM from your desktop machine, use the following settings:
 
-```Host:     192.168.33.11
-Port:     3306
-User:     appadmin
-Password: Password1```
+    Host:     192.168.33.11
+    Port:     3306
+    User:     appadmin
+    Password: Password1
