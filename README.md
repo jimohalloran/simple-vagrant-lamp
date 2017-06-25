@@ -48,7 +48,11 @@ stored on your local machine.  Subsequent ```vagrant up``` commands will not dow
 a "vanilla" CentOS 7 install with no services configured.  The box file is then imported into VirtualBox automatically
 and Chef is run to configure the box as per the recipes in this repository.
 
-Once ```vagrant up``` is finished, the VM is ready to use.  You can access the VM with:
+Once ```vagrant up``` is finished, run the following command to configure your local hosts file entries:
+
+    vagrant hostmanager
+
+Finally, the VM is ready to use.  You can access the VM with:
 
     vagrant ssh
 

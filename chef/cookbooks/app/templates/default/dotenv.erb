@@ -1,0 +1,32 @@
+APP_ENV=local
+APP_KEY=base64:/TJbW66uloHmuBXPfHDCi6vPkHnb2rlO1aI034v/RhY=
+APP_DEBUG=true
+APP_LOG_LEVEL=debug
+APP_URL_BASE="http://<%= node['app']['url']['host'] %>"
+
+DB_CONNECTION=mysql
+DB_HOST="<%= node['app']['mysql']['app']['host'] %>"
+DB_PORT=3306
+DB_DATABASE="<%= node['app']['mysql']['app']['database'] %>"
+DB_USERNAME="<%= node['app']['mysql']['app']['username'] %>"
+DB_PASSWORD="<%= node['app']['mysql']['app']['password'] %>"
+
+BROADCAST_DRIVER=log
+CACHE_DRIVER=file
+SESSION_DRIVER=file
+QUEUE_DRIVER=sync
+
+REDIS_HOST=127.0.0.1
+REDIS_PASSWORD=null
+REDIS_PORT=6379
+
+MAIL_DRIVER=smtp
+MAIL_HOST=mailtrap.io
+MAIL_PORT=2525
+MAIL_USERNAME=null
+MAIL_PASSWORD=null
+MAIL_ENCRYPTION=null
+
+PUSHER_APP_ID=
+PUSHER_APP_KEY=
+PUSHER_APP_SECRET=

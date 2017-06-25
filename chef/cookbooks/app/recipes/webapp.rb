@@ -6,3 +6,11 @@ web_app "app" do
   ssl node['app']['ssl']['enabled']
   notifies :restart, resources(:service => "apache2")
 end
+
+
+#template "#{node['app']['base']}/application/.env" do
+#  source "dotenv.erb"
+#  #mode 0644
+#  #owner "vagrant"
+#  #group "vagrant"
+#end

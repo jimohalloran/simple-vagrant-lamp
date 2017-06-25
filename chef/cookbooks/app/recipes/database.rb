@@ -1,30 +1,59 @@
-include_recipe "database::mysql"
+#
+## Cookbook Name:: app
+## Recipe:: mysql
+##
+## Copyright 2016, Tux IT Services
+##
+#
+
+# SELinux enforcing breaks the custom mysql stuff the musql cookbook sets up
+include_recipe 'selinux::permissive'
+
+include_recipe 'yum-mysql-community::mysql57'
+
+
+mysql_client 'default' do
+  version node['mysql']['server_version']
+  action :create
+end
+
+mysql_service 'default' do
+  version node['mysql']['server_version']
+  bind_address '0.0.0.0'
+  port '3306'
+  data_dir '/var/lib/mysql'
+  initial_root_password node['mysql']['server_root_password']
+  action [:create, :start]
+end
+
+package 'mysql-community-devel' do
+  version '5.7.18-1.el7'
+  action :install
+end
+
+mysql2_chef_gem 'default' do
+  package_version node['mysql']['server_version']
+  action :install
+end
 
 mysql_connection_info = {
-	:host => 'localhost',
+	:host => '127.0.0.1',
 	:username => 'root',
 	:password => node['mysql']['server_root_password']
 }
 
-mysql_database node['app']['mysql']['database']  do
-	connection mysql_connection_info
-	action :create
-end
+node['app']['mysql'].each do |key, db|
+    mysql_database "#{db['database']}" do
+        connection mysql_connection_info
+        action :create
+    end
 
-mysql_database_user node['app']['mysql']['application']['username'] do
-	connection mysql_connection_info
-	password node['app']['mysql']['application']['password']
-	database_name node['app']['mysql']['database']
-	host node['app']['mysql']['application']['acl']
-	privileges [:all]
-	action :grant
-end
-
-mysql_database_user node['app']['mysql']['admin']['username'] do
-	connection mysql_connection_info
-	password node['app']['mysql']['admin']['password']
-	host node['app']['mysql']['admin']['acl']
-	privileges [:all]
-	action :grant
-	grant_option true
+    mysql_database_user "#{db['username']}" do
+        connection mysql_connection_info
+        password db['password']
+        database_name db['database']
+        host db['acl']
+        privileges [:all]
+        action :grant
+    end
 end

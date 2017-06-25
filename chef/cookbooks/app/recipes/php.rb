@@ -1,7 +1,15 @@
-%w{php-cli php-pdo php-mbstring php-mcrypt php-mysql php-soap php-gd php-pear php-xml php-devel}.each do |pkg|
-  package pkg do
-    action :install
-  end
+include_recipe 'yum-ius'
+include_recipe 'php::package'
+
+file "#{node['apache']['dir']}/conf.d/php.conf" do
+  action :delete
+  backup false
+end
+
+apache_module 'php7' do
+  conf true
+  filename "libphp7.so"
+  notifies :restart, 'service[apache2]'
 end
 
 file "/etc/php.d/timezone.ini" do
